@@ -1,0 +1,8 @@
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\bin\Debug\MainConsole.exe.config
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\bin\Debug\MainConsole.exe
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\bin\Debug\MainConsole.pdb
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\bin\Debug\UnbeatableTicTacToeLibrary.dll
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\bin\Debug\UnbeatableTicTacToeLibrary.pdb
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\obj\Debug\MainConsole.csprojResolveAssemblyReference.cache
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\obj\Debug\MainConsole.exe
+c:\Users\geoffrey.kuhn\Documents\Visual Studio 2013\Projects\UnbeatableTicTacToeLibrary\MainConsole\obj\Debug\MainConsole.pdb
