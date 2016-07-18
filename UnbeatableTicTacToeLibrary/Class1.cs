@@ -15,8 +15,8 @@ namespace UnbeatableTicTacToeLibrary
         private string x_cpu = "X";
         private string player_or_cpu="O";//start as the player
 
-        public static int x_coord=0;
-        public static int y_coord=0;
+        public static int x_coord = 0;
+        public static int y_coord = 0;
         public static string[,] board = { { "*", "*", "*" }, { "*", "*", "*" }, { "*", "*", "*" } };
 
         public int amount { get; set; }
@@ -27,28 +27,51 @@ namespace UnbeatableTicTacToeLibrary
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(board[i, j]);
+                    Console.Write(board[i, j]+" ");
                 }
                 Console.WriteLine();
+                Console.WriteLine();
+
             }
+        }
+
+        public void user_input()
+        {
+            Console.WriteLine("Enter the X coordinate, coord starting at top left corner(0-2)");
+            x_coord = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Y coordinate (0-2)");
+            y_coord = Convert.ToInt32(Console.ReadLine());
         }
 
         public void main_loop()
         {
             //player_or_cpu = "O"; //start as the player
 
-            print_board();
+           // print_board();
 
                 while(!check_board(player_or_cpu))
                 {
+
+
+                    if (tie_check())
+                    {
+                        Console.WriteLine("Tie!");
+                        Console.ReadLine();
+                        System.Environment.Exit(1);
+                    }
+
+
                     //runs while this method returns false as no one has won
                     if (player_or_cpu.Equals("O"))
                     {
-                        Console.WriteLine("Enter the X coordinate, coord starting at top left corner(0-2)");
-                        x_coord = Convert.ToInt32(Console.ReadLine());
+                        user_input();
 
-                        Console.WriteLine("Enter the Y coordinate (0-2)");
-                        y_coord = Convert.ToInt32(Console.ReadLine());
+                        if (board[y_coord, x_coord] == "X" || board[y_coord, x_coord] == "O" || y_coord > 2 || y_coord < 0 || x_coord > 2 || x_coord < 0)//checks to see if that spot is already played or coord out of bounds, if so then ask user again
+                        {
+                            Console.WriteLine("Spot already played, choose again");
+                            user_input();
+                        }
 
                         set_move(y_coord, x_coord, player_or_cpu);
                     }
@@ -66,7 +89,6 @@ namespace UnbeatableTicTacToeLibrary
                     
                     if (player_or_cpu.Equals("O"))
                     {
-                        print_board();
                         player_or_cpu = x_cpu;
                     }
                     else
@@ -74,6 +96,24 @@ namespace UnbeatableTicTacToeLibrary
                         player_or_cpu = o_player;
                     }
                 }
+              
+           
+        }
+
+        public bool tie_check()//if tie check still see unplayed move then it returns false
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                   if(board[i, j]=="*")
+                   {
+                       return false;
+                   }
+                }
+            }
+
+            return true;
         }
 
         public static bool check_board(string player_or_cpu)

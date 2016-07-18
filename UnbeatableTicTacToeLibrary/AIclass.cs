@@ -27,24 +27,18 @@ namespace UnbeatableTicTacToeLibrary
         static int cpu_sum_col2;
         static int cpu_sum_col3;
 
+       static int v = 0;
+       static  int z = 0;
+
        public static void cpu_move(string player_or_cpu, string[,] board)
        {
-           cpu_sum_row1 = 0; //clear for start of a new count
-           cpu_sum_row2 = 0;
-           cpu_sum_row3 = 0;
+           cpu_sum_row1 = cpu_sum_row2 = cpu_sum_row3 = 0; //clear for start of a new count
 
-           player_sum_row1 = 0;
-           player_sum_row2 = 0;
-           player_sum_row3 = 0;
+           player_sum_row1 = player_sum_row2 = player_sum_row3 = 0;
 
-           player_sum_col1 = 0;
-           player_sum_col2 = 0;
-           player_sum_col3 = 0;
+           player_sum_col1 = player_sum_col2 = player_sum_col3 = 0;
 
-           cpu_sum_col1 = 0;
-           cpu_sum_col2 = 0;
-           cpu_sum_col3 = 0;
-
+           cpu_sum_col1 = cpu_sum_col2 = cpu_sum_col3 = 0;
 
            List<int> player_sum_list_row = new List<int>();
            List<int> cpu_sum_list_row = new List<int>();
@@ -68,6 +62,7 @@ namespace UnbeatableTicTacToeLibrary
            cpu_sum_list_col.Add(player_sum_col1);
            cpu_sum_list_col.Add(player_sum_col2);
            cpu_sum_list_col.Add(player_sum_col3);
+
 
            int buffer_val_player;
            int buffer_val_cpu;
@@ -94,15 +89,7 @@ namespace UnbeatableTicTacToeLibrary
                    }
                }
            }
-           
-            Console.WriteLine("CPU SUM LIST ROW 0: " + cpu_sum_list_row[0]);
-            Console.WriteLine("CPU SUM LIST ROW 1: " + cpu_sum_list_row[1]);
-            Console.WriteLine("CPU SUM LIST ROW 2: " + cpu_sum_list_row[2]);
 
-            Console.WriteLine("PLAYER SUM LIST ROW 0: " + player_sum_list_row[0]);
-            Console.WriteLine("PLAYER SUM LIST ROW 1: " + player_sum_list_row[1]);
-            Console.WriteLine("PLAYER SUM LIST ROW 2: " + player_sum_list_row[2]);
-            
            //iterates by column for the count
 
            for (int i = 0; i < 3; i++)
@@ -125,239 +112,103 @@ namespace UnbeatableTicTacToeLibrary
                }
 
            }
-           
-            Console.WriteLine("CPU SUM LIST COL 0: " + cpu_sum_list_col[0]);
-            Console.WriteLine("CPU SUM LIST COL 1: " + cpu_sum_list_col[1]);
-            Console.WriteLine("CPU SUM LIST COL 2: " + cpu_sum_list_col[2]);
-
-            Console.WriteLine("PLAYER SUM LIST COL 0: " + player_sum_list_col[0]);
-            Console.WriteLine("PLAYER SUM LIST COL 1: " + player_sum_list_col[1]);
-            Console.WriteLine("PLAYER SUM LIST COL 2: " + player_sum_list_col[2]);
-
-            Console.WriteLine("Min player col INDEX: " + player_sum_list_col.IndexOf(player_sum_list_col.Min()));
-            Console.WriteLine("Min player row INDEX: " + player_sum_list_row.IndexOf(player_sum_list_row.Min()));
-
-            Console.WriteLine("Max player col INDEX: " + player_sum_list_col.IndexOf(player_sum_list_col.Max()));
-            Console.WriteLine("Max player row INDEX: " + player_sum_list_row.IndexOf(player_sum_list_row.Max()));
-            
 
            //get the col that has the max 
-           int move_x = player_sum_list_col.IndexOf(player_sum_list_col.Max());
-           int move_y = player_sum_list_row.IndexOf(player_sum_list_row.Max());
+   
            bool run_once_flag = true;
+
+           int amount = 2; //number of moves
 
         //   cpu_move(player_or_cpu, board);
 
-           //SECOND MOVE
-           if (player_sum_list_col[0] == 2)
+          //diag block
+           if (board[0, 0] == "O" && board[1, 1] == "O")
            {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 0] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(j, 0, "X");
+               Class1.set_move(2,2,"X");
+           }
+           else if (board[2, 0] == "O" && board[1, 1] == "O")
+           {
+               Class1.set_move(0, 2, "X");
+           }
+           else if (board[0, 2] == "O" && board[1, 1] == "O")
+           {
+               Class1.set_move(2,0,"X");
+           }
+           else if (board[2, 2] == "O" && board[1, 1] == "O")
+           {
+               Class1.set_move(0, 0, "X");
+           }
 
-                       run_once_flag = false;
+           //SECOND MOVE, always check first for winning condition
+           for (int index = 0; index < 3; index++)
+           {
+               if (player_sum_list_col[index] == amount)
+               {
+                   for (int j = 0; j < 3; j++)
+                   {
+                       if (board[j, index] == "*" && run_once_flag)
+                       {
+                           Class1.set_move(j, index, "X");
+
+                           run_once_flag = false;
+                       }
                    }
                }
            }
-           else if (player_sum_list_col[1] == 2)
-           {
-               run_once_flag = true;
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 1] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(j, 1, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_col[2] == 2)
-           {
-               run_once_flag = true;
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 2] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(j, 2, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-
-           }
-           else if (player_sum_list_row[0] == 2)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[0, j] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(0, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_row[1] == 2)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[1, j] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(1, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_row[2] == 2)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[2, j] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(2, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-            
-           //FIRST MOVE
-           
-           if (player_sum_list_col[0] == 1)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 0] == "*"  && run_once_flag)
-                   {
-                       Class1.set_move(j,0,"X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_col[1] == 1)
-           {
-               run_once_flag = true;
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 1] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(j, 1, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_col[2] == 1)
-           {
-               run_once_flag = true;
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[j, 2] == "*"  && run_once_flag)
-                   {
-                       Class1.set_move(j, 2, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-
-           }
-           else if (player_sum_list_row[0] == 1)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[0, j] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(0, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_row[1] == 1)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[1, j] == "*" && run_once_flag)
-                   {
-                       Class1.set_move(1, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           else if (player_sum_list_row[2] == 1)
-           {
-               for (int j = 0; j < 3; j++)
-               {
-                   if (board[2, j] == "*"  && run_once_flag)
-                   {
-                       Class1.set_move(2, j, "X");
-
-                       run_once_flag = false;
-                   }
-               }
-           }
-           //SECOND MOVE
           
- 
-            /*
-            if (move_x != 2 && move_y != 2 && board[move_y + 1, move_x + 1] == "*" && board[move_y + 1, move_x + 1] != "O" && board[move_y + 1, move_x + 1] != "X")
-            {
-                if (board[move_y + 1, move_x] == "*")
-                {
-                    Class1.set_move(move_y + 1, move_x, "X");
+           for (int index = 0; index < 3; index++)
+           {
+               if (player_sum_list_row[0] == amount)
+               {
+                   for (int j = 0; j < 3; j++)
+                   {
+                       if (board[index, j] == "*" && run_once_flag)
+                       {
+                           Class1.set_move(index, j, "X");
 
-                }
-                else
-                {
-                    Class1.set_move(move_y + 1, move_x + 1, "X");
-                }
-            }
-            else if (move_y != 0 && move_x != 2 && board[move_y - 1, move_x + 1] == "*" && board[move_y - 1, move_x + 1] != "O" && board[move_y - 1, move_x + 1] != "X")
-            {
-                if (board[move_y - 1, move_x] == "*")
-                {
-                    Class1.set_move(move_y + 1, move_x, "X");
-                }
-                else
-                {
-                    Class1.set_move(move_y - 1, move_x + 1, "X");
-                }
-            }
-            else if (move_x != 0 && move_y != 2 && board[move_y + 1, move_x - 1] == "*" && board[move_y + 1, move_x - 1] != "O" && board[move_y + 1, move_x - 1] != "X")
-            {
-                if (board[move_y - 1, move_x] == "*")
-                {
-                    Class1.set_move(move_y + 1, move_x, "X");
-                }
-                else
-                {
-                    Class1.set_move(move_y + 1, move_x - 1, "X");
-                }
-            }
-            else if (move_x != 0 && move_y != 0 && board[move_y - 1, move_x - 1] == "*" && board[move_y - 1, move_x - 1] != "O" && board[move_y - 1, move_x - 1] != "X")
-            {
-                if (board[move_y - 1, move_x] == "*")
-                {
-                    Class1.set_move(move_y + 1, move_x, "X");
-                }
-                else
-                {
-                    Class1.set_move(move_y - 1, move_x - 1, "X");
-                }
-            }
-             
-            */
+                           run_once_flag = false;
+                       }
+                   }
+               }
+           }
+           
+           amount--;//decrements the check, so now it will check for one move CRITICAL
+           //FIRST MOVE
+           for (int index = 0; index < 3; index++)
+           {
+               if (player_sum_list_col[0] == amount)
+               {
+                   for (int j = 0; j < 3; j++)
+                   {
+                       if (board[j, index] == "*" && run_once_flag)
+                       {
+                           Class1.set_move(j, index, "X");
+
+                           run_once_flag = false;
+                       }
+                   }
+               }
+           }
+          
+           for (int index = 0; index < 3; index++)
+               if (player_sum_list_row[index] == amount)
+           {
+               for (int j = 0; j < 3; j++)
+               {
+                   if (board[index, j] == "*" && run_once_flag)
+                   {
+                       Class1.set_move(index, j, "X");
+
+                       run_once_flag = false;
+                   }
+               }
+           }
+           
 
             if (Class1.check_board(player_or_cpu))//if the check_board function returns as true the game will come to an end
             {
                 Console.ReadLine();
-                System.Environment.Exit(1);
+                //System.Environment.Exit(1);
             }
         }
     }
