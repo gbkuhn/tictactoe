@@ -155,6 +155,32 @@ namespace UnbeatableTicTacToeLibrary
                     }
                 }
             }
+
+
+
+            
+            if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] =="*" && run_once_flag)
+            {
+                Class1.set_move(2, 2, "X");
+                run_once_flag = false;
+            }
+            else if (board[2, 0] == "O" && board[1, 1] == "O" && board[0, 2] == "*" && run_once_flag)
+            {
+                Class1.set_move(0, 2, "X");
+                run_once_flag = false;
+            }
+            else if (board[0, 2] == "O" && board[1, 1] == "O" && board[2, 0] == "*" && run_once_flag)
+            {
+                Class1.set_move(2, 0, "X");
+                run_once_flag = false;
+            }
+            else if (board[2, 2] == "O" && board[1, 1] == "O" && board[0, 0] == "*" && run_once_flag)
+            {
+                Class1.set_move(0, 0, "X");
+                run_once_flag = false;
+            }
+
+
             //////////////
             for (int index = 0; index < 3; index++)
             {
@@ -187,34 +213,24 @@ namespace UnbeatableTicTacToeLibrary
                     }
                 }
             }
-            
-
-            if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] =="*" && run_once_flag)
-            {
-                Class1.set_move(2, 2, "X");
-                run_once_flag = false;
-            }
-            else if (board[2, 0] == "O" && board[1, 1] == "O" && board[0, 2] == "*" && run_once_flag)
-            {
-                Class1.set_move(0, 2, "X");
-                run_once_flag = false;
-            }
-            else if (board[0, 2] == "O" && board[1, 1] == "O" && board[2, 0] == "*" && run_once_flag)
-            {
-                Class1.set_move(2, 0, "X");
-                run_once_flag = false;
-            }
-            else if (board[2, 2] == "O" && board[1, 1] == "O" && board[0, 0] == "*" && run_once_flag)
-            {
-                Class1.set_move(0, 0, "X");
-                run_once_flag = false;
-            }
-
-
 
             amount--;//decrements the check, so now it will check for one move CRITICAL
            
-            //FIRST MOVE
+            //FIRST MOVE, reversed from the above loops so the row gets checkd first
+            for (int index = 0; index < 3; index++)
+                if (player_sum_list_row[index] == amount)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (board[index, j] == "*" && run_once_flag)
+                        {
+                            Class1.set_move(index, j, "X");
+
+                            run_once_flag = false;
+                        }
+                    }
+                }
+
             for (int index = 0; index < 3; index++)
             {
                 if (player_sum_list_col[index] == amount)//0!!!!!!
@@ -231,19 +247,7 @@ namespace UnbeatableTicTacToeLibrary
                 }
             }
 
-            for (int index = 0; index < 3; index++)
-                if (player_sum_list_row[index] == amount)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (board[index, j] == "*" && run_once_flag)
-                        {
-                            Class1.set_move(index, j, "X");
-
-                            run_once_flag = false;
-                        }
-                    }
-                }
+            
             /*
             Console.WriteLine("CPU SUM LIST COL 0: " + cpu_sum_list_col[0]);
             Console.WriteLine("CPU SUM LIST COL 1: " + cpu_sum_list_col[1]);

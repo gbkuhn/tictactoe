@@ -46,11 +46,55 @@ namespace UnbeatableTicTacToeLibrary
 
         public void user_input()
         {
-            Console.WriteLine("Enter the X coordinate, coord starting at top left corner(0-2)");
-            x_coord = Convert.ToInt32(Console.ReadLine());
+            
+            Console.WriteLine("Enter number 0-9");
+            int scase = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter the Y coordinate (0-2)");
-            y_coord = Convert.ToInt32(Console.ReadLine());
+            switch (scase)
+            {
+                // The following switch section causes an error.
+                case 0:
+                    x_coord = 0;
+                    y_coord = 0;
+                    break;
+                // Add a break or other jump statement here.
+                case 1:
+                    x_coord = 1;
+                    y_coord = 0;
+                    break;
+               case 2:
+                    x_coord = 2;
+                    y_coord = 0;
+                    break;
+               case 3:
+                    x_coord = 0;
+                    y_coord = 1;
+                    break;
+               case 4:
+                    x_coord = 1;
+                    y_coord = 1;
+                    break;
+               case 5:
+                    x_coord = 2;
+                    y_coord = 1;
+                    break;
+               case 6:
+                    x_coord = 0;
+                    y_coord = 2;
+                    break;
+               case 7:
+                    x_coord = 1;
+                    y_coord = 2;
+                    break;
+               case 8:
+                    x_coord = 2;
+                    y_coord = 2;
+                    break;
+               default:
+                    Console.Write("why do i exist");
+                    break;
+            }
+
         }
 
         public void main_loop()
