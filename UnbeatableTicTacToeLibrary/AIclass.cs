@@ -63,7 +63,6 @@ namespace UnbeatableTicTacToeLibrary
             cpu_sum_list_col.Add(player_sum_col2);
             cpu_sum_list_col.Add(player_sum_col3);
 
-
             int buffer_val_player;
             int buffer_val_cpu;
 
@@ -110,7 +109,6 @@ namespace UnbeatableTicTacToeLibrary
                         player_sum_list_col[i] = buffer_val_player;
                     }
                 }
-
             }
 
             //get the col that has the max 
@@ -125,6 +123,39 @@ namespace UnbeatableTicTacToeLibrary
 
             
             //SECOND MOVE, always check first for winning condition
+            ///////////////////WINNING MOVE TAKES PRECEDENCE OVER BLOCKING
+            for (int index = 0; index < 3; index++)
+            {
+                if (cpu_sum_list_col[index] == amount)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (board[j, index] == "*" && run_once_flag)
+                        {
+                            Class1.set_move(j, index, "X");
+
+                            run_once_flag = false;
+                        }
+                    }
+                }
+            }
+
+            for (int index = 0; index < 3; index++)
+            {
+                if (cpu_sum_list_row[index] == amount)//0!!!!!
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (board[index, j] == "*" && run_once_flag)
+                        {
+                            Class1.set_move(index, j, "X");
+
+                            run_once_flag = false;
+                        }
+                    }
+                }
+            }
+            //////////////
             for (int index = 0; index < 3; index++)
             {
                 if (player_sum_list_col[index] == amount)
@@ -156,8 +187,7 @@ namespace UnbeatableTicTacToeLibrary
                     }
                 }
             }
-
-
+            
 
             if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] =="*" && run_once_flag)
             {
@@ -183,6 +213,7 @@ namespace UnbeatableTicTacToeLibrary
 
 
             amount--;//decrements the check, so now it will check for one move CRITICAL
+           
             //FIRST MOVE
             for (int index = 0; index < 3; index++)
             {
@@ -213,7 +244,7 @@ namespace UnbeatableTicTacToeLibrary
                         }
                     }
                 }
-
+            /*
             Console.WriteLine("CPU SUM LIST COL 0: " + cpu_sum_list_col[0]);
             Console.WriteLine("CPU SUM LIST COL 1: " + cpu_sum_list_col[1]);
             Console.WriteLine("CPU SUM LIST COL 2: " + cpu_sum_list_col[2]);
@@ -235,7 +266,7 @@ namespace UnbeatableTicTacToeLibrary
 
             Console.WriteLine("Max player col INDEX: " + player_sum_list_col.IndexOf(player_sum_list_col.Max()));
             Console.WriteLine("Max player row INDEX: " + player_sum_list_row.IndexOf(player_sum_list_row.Max()));
-
+            */
             if (Class1.check_board(player_or_cpu))//if the check_board function returns as true the game will come to an end
             {
                 Console.ReadLine();

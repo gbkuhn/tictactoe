@@ -21,11 +21,22 @@ namespace UnbeatableTicTacToeLibrary
 
         public static void print_board()
         {
+            int index = 0;
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(board[i, j] + " ");
+                    if (board[i, j] == "*")
+                    {
+                        Console.Write(index + " ");
+                        index++;
+                    }
+                    else
+                    {
+                        index++;
+                        Console.Write(board[i, j] + " ");
+                    }
                 }
                 Console.WriteLine();
                 Console.WriteLine();
@@ -55,8 +66,9 @@ namespace UnbeatableTicTacToeLibrary
                 if (tie_check())
                 {
                     Console.WriteLine("Tie!");
+                    print_board();
                     Console.ReadLine();
-                    System.Environment.Exit(1);
+                    //System.Environment.Exit(1);
                 }
 
 
@@ -95,6 +107,7 @@ namespace UnbeatableTicTacToeLibrary
                 }
             }
 
+            Console.ReadLine();//keeps the window open after a win
 
         }
 
