@@ -28,9 +28,9 @@ namespace UnbeatableTicTacToeLibrary
         static int cpu_sum_col3;
 
         private static bool first_move = true;
-
-        static int v = 0;
-        static int z = 0;
+        
+        private static string o_player = "O";
+        private static string x_cpu = "X";
 
         public static void cpu_move(string player_or_cpu, string[,] board)
         {
@@ -68,6 +68,8 @@ namespace UnbeatableTicTacToeLibrary
             int buffer_val_player;
             int buffer_val_cpu;
 
+
+
             //CPU move
 
             //iterates by row for the count
@@ -76,13 +78,13 @@ namespace UnbeatableTicTacToeLibrary
                 for (int j = 0; j < 3; j++)
                 {
                     // Console.Write(board[i, j]);
-                    if (board[i, j].Equals("X"))
+                    if (board[i, j].Equals(x_cpu))
                     {
                         buffer_val_cpu = cpu_sum_list_row[i];
                         buffer_val_cpu++; //increment count
                         cpu_sum_list_row[i] = buffer_val_cpu;
                     }
-                    else if (board[i, j].Equals("O"))
+                    else if (board[i, j].Equals(o_player))
                     {
                         buffer_val_player = player_sum_list_row[i];
                         buffer_val_player++;
@@ -98,13 +100,13 @@ namespace UnbeatableTicTacToeLibrary
                 for (int j = 0; j < 3; j++)
                 {
                     // Console.Write(board[i, j]);
-                    if (board[j, i].Equals("X"))
+                    if (board[j, i].Equals(x_cpu))
                     {
                         buffer_val_cpu = cpu_sum_list_col[i];
                         buffer_val_cpu++; //increment count
                         cpu_sum_list_col[i] = buffer_val_cpu;
                     }
-                    else if (board[j, i].Equals("O"))
+                    else if (board[j, i].Equals(o_player))
                     {
                         buffer_val_player = player_sum_list_col[i];
                         buffer_val_player++;
@@ -134,7 +136,7 @@ namespace UnbeatableTicTacToeLibrary
                     {
                         if (board[j, index] == "*" && run_once_flag)
                         {
-                            Class1.set_move(j, index, "X");
+                            Class1.set_move(j, index, x_cpu);
 
                             run_once_flag = false;
                         }
@@ -150,7 +152,7 @@ namespace UnbeatableTicTacToeLibrary
                     {
                         if (board[index, j] == "*" && run_once_flag)
                         {
-                            Class1.set_move(index, j, "X");
+                            Class1.set_move(index, j, x_cpu);
 
                             run_once_flag = false;
                         }
@@ -161,33 +163,33 @@ namespace UnbeatableTicTacToeLibrary
 
 
 
-            if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] == "*" && run_once_flag)
+            if (board[0, 0] == o_player && board[1, 1] == o_player && board[2, 2] == "*" && run_once_flag)
             {
-                Class1.set_move(2, 2, "X");
+                Class1.set_move(2, 2, x_cpu);
                 run_once_flag = false;
             }
-            else if (board[2, 0] == "O" && board[1, 1] == "O" && board[0, 2] == "*" && run_once_flag)
+            else if (board[2, 0] == o_player && board[1, 1] == o_player && board[0, 2] == "*" && run_once_flag)
             {
-                Class1.set_move(0, 2, "X");
+                Class1.set_move(0, 2, x_cpu);
                 run_once_flag = false;
             }
-            else if (board[0, 2] == "O" && board[1, 1] == "O" && board[2, 0] == "*" && run_once_flag)
+            else if (board[0, 2] == o_player && board[1, 1] == o_player && board[2, 0] == "*" && run_once_flag)
             {
-                Class1.set_move(2, 0, "X");
+                Class1.set_move(2, 0, x_cpu);
                 run_once_flag = false;
             }
-            else if (board[2, 2] == "O" && board[1, 1] == "O" && board[0, 0] == "*" && run_once_flag)
+            else if (board[2, 2] == o_player && board[1, 1] == o_player && board[0, 0] == "*" && run_once_flag)
             {
-                Class1.set_move(0, 0, "X");
+                Class1.set_move(0, 0, x_cpu);
                 run_once_flag = false;
             }
-            else if (board[2, 2] == "O" && board[0, 0] == "O" && board[1, 1] == "*" && run_once_flag)
+            else if (board[2, 2] == o_player && board[0, 0] == o_player && board[1, 1] == "*" && run_once_flag)
             {
-                Class1.set_move(1, 1, "X");
+                Class1.set_move(1, 1, x_cpu);
                 run_once_flag = false;
-            }else if (board[2, 0] == "O" && board[0, 2] == "O" && board[1, 1] == "*" && run_once_flag)
+            }else if (board[2, 0] == o_player && board[0, 2] == o_player && board[1, 1] == "*" && run_once_flag)
             {
-                Class1.set_move(1, 1, "X");
+                Class1.set_move(1, 1, x_cpu);
                 run_once_flag = false;
             }
 
@@ -201,7 +203,7 @@ namespace UnbeatableTicTacToeLibrary
                     {
                         if (board[j, index] == "*" && run_once_flag)
                         {
-                            Class1.set_move(j, index, "X");
+                            Class1.set_move(j, index, x_cpu);
 
                             run_once_flag = false;
                         }
@@ -217,7 +219,7 @@ namespace UnbeatableTicTacToeLibrary
                     {
                         if (board[index, j] == "*" && run_once_flag)
                         {
-                            Class1.set_move(index, j, "X");
+                            Class1.set_move(index, j, x_cpu);
 
                             run_once_flag = false;
                         }
@@ -231,16 +233,16 @@ namespace UnbeatableTicTacToeLibrary
 
             if (first_move)
             {
-                if (board[1, 1] == "O")
+                if (board[1, 1] == o_player)
                 {
-                    board[0, 0] = "X";
+                    board[0, 0] = x_cpu;
                     first_move = false;
                     run_once_flag = false;
 
                 }
-                else if (board[1,1]!="O")
+                else if (board[1,1]!=o_player)
                 {
-                    board[1, 1] = "X";
+                    board[1, 1] = x_cpu;
                     first_move = false;
                     run_once_flag = false;
 
@@ -257,10 +259,9 @@ namespace UnbeatableTicTacToeLibrary
                     {
                         if (board[index, j] == "*" && run_once_flag)
                         {
-                            Class1.set_move(index, j, "X");
+                            Class1.set_move(index, j, x_cpu);
 
                             run_once_flag = false;
-                            Console.WriteLine("single check");
                         }
                     }
                 }
@@ -275,10 +276,9 @@ namespace UnbeatableTicTacToeLibrary
                         {
                             if (board[j, index] == "*" && run_once_flag)
                             {
-                                Class1.set_move(j, index, "X");
+                                Class1.set_move(j, index, x_cpu);
 
                                 run_once_flag = false;
-                                Console.WriteLine("single check");
 
                             }
                         }

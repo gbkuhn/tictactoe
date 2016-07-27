@@ -47,7 +47,7 @@ namespace UnbeatableTicTacToeLibrary
         public void user_input()
         {
 
-            Console.WriteLine("Enter number 0-9");
+            Console.WriteLine("Enter number 0-8");
             int scase = Convert.ToInt32(Console.ReadLine());
 
             switch (scase)
@@ -235,5 +235,4 @@ namespace UnbeatableTicTacToeLibrary
         }
     }
 }
-
 
