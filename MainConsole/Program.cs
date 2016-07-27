@@ -14,7 +14,7 @@ namespace MainConsole
         {
             Class1 board_obj = new Class1();
            
-            //board_obj.print_board();
+            Class1.print_board();//initial print of board
 
             board_obj.main_loop();
 

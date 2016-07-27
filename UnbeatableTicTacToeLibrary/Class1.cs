@@ -46,7 +46,7 @@ namespace UnbeatableTicTacToeLibrary
 
         public void user_input()
         {
-            
+
             Console.WriteLine("Enter number 0-9");
             int scase = Convert.ToInt32(Console.ReadLine());
 
@@ -62,35 +62,35 @@ namespace UnbeatableTicTacToeLibrary
                     x_coord = 1;
                     y_coord = 0;
                     break;
-               case 2:
+                case 2:
                     x_coord = 2;
                     y_coord = 0;
                     break;
-               case 3:
+                case 3:
                     x_coord = 0;
                     y_coord = 1;
                     break;
-               case 4:
+                case 4:
                     x_coord = 1;
                     y_coord = 1;
                     break;
-               case 5:
+                case 5:
                     x_coord = 2;
                     y_coord = 1;
                     break;
-               case 6:
+                case 6:
                     x_coord = 0;
                     y_coord = 2;
                     break;
-               case 7:
+                case 7:
                     x_coord = 1;
                     y_coord = 2;
                     break;
-               case 8:
+                case 8:
                     x_coord = 2;
                     y_coord = 2;
                     break;
-               default:
+                default:
                     Console.Write("why do i exist");
                     break;
             }
@@ -235,6 +235,5 @@ namespace UnbeatableTicTacToeLibrary
         }
     }
 }
-
 
 

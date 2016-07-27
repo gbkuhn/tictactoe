@@ -27,6 +27,8 @@ namespace UnbeatableTicTacToeLibrary
         static int cpu_sum_col2;
         static int cpu_sum_col3;
 
+        private static bool first_move = true;
+
         static int v = 0;
         static int z = 0;
 
@@ -121,7 +123,7 @@ namespace UnbeatableTicTacToeLibrary
 
             //diag block
 
-            
+
             //SECOND MOVE, always check first for winning condition
             ///////////////////WINNING MOVE TAKES PRECEDENCE OVER BLOCKING
             for (int index = 0; index < 3; index++)
@@ -158,8 +160,8 @@ namespace UnbeatableTicTacToeLibrary
 
 
 
-            
-            if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] =="*" && run_once_flag)
+
+            if (board[0, 0] == "O" && board[1, 1] == "O" && board[2, 2] == "*" && run_once_flag)
             {
                 Class1.set_move(2, 2, "X");
                 run_once_flag = false;
@@ -177,6 +179,15 @@ namespace UnbeatableTicTacToeLibrary
             else if (board[2, 2] == "O" && board[1, 1] == "O" && board[0, 0] == "*" && run_once_flag)
             {
                 Class1.set_move(0, 0, "X");
+                run_once_flag = false;
+            }
+            else if (board[2, 2] == "O" && board[0, 0] == "O" && board[1, 1] == "*" && run_once_flag)
+            {
+                Class1.set_move(1, 1, "X");
+                run_once_flag = false;
+            }else if (board[2, 0] == "O" && board[0, 2] == "O" && board[1, 1] == "*" && run_once_flag)
+            {
+                Class1.set_move(1, 1, "X");
                 run_once_flag = false;
             }
 
@@ -215,10 +226,32 @@ namespace UnbeatableTicTacToeLibrary
             }
 
             amount--;//decrements the check, so now it will check for one move CRITICAL
-           
+
             //FIRST MOVE, reversed from the above loops so the row gets checkd first
+
+            if (first_move)
+            {
+                if (board[1, 1] == "O")
+                {
+                    board[0, 0] = "X";
+                    first_move = false;
+                    run_once_flag = false;
+
+                }
+                else if (board[1,1]!="O")
+                {
+                    board[1, 1] = "X";
+                    first_move = false;
+                    run_once_flag = false;
+
+
+                }
+            }
+
+            if (first_move == false) { 
             for (int index = 0; index < 3; index++)
-                if (player_sum_list_row[index] == amount)
+            {
+                if (player_sum_list_row[index] == amount && cpu_sum_list_row[index] != amount)
                 {
                     for (int j = 0; j < 3; j++)
                     {
@@ -227,27 +260,34 @@ namespace UnbeatableTicTacToeLibrary
                             Class1.set_move(index, j, "X");
 
                             run_once_flag = false;
+                            Console.WriteLine("single check");
                         }
                     }
                 }
+                
+            }
 
-            for (int index = 0; index < 3; index++)
-            {
-                if (player_sum_list_col[index] == amount)//0!!!!!!
+                for (int index = 0; index < 3; index++)
                 {
-                    for (int j = 0; j < 3; j++)
+                    if (player_sum_list_col[index] == amount && cpu_sum_list_col[index] != amount)
                     {
-                        if (board[j, index] == "*" && run_once_flag)
+                        for (int j = 0; j < 3; j++)
                         {
-                            Class1.set_move(j, index, "X");
+                            if (board[j, index] == "*" && run_once_flag)
+                            {
+                                Class1.set_move(j, index, "X");
 
-                            run_once_flag = false;
+                                run_once_flag = false;
+                                Console.WriteLine("single check");
+
+                            }
                         }
                     }
+
                 }
             }
 
-            
+
             /*
             Console.WriteLine("CPU SUM LIST COL 0: " + cpu_sum_list_col[0]);
             Console.WriteLine("CPU SUM LIST COL 1: " + cpu_sum_list_col[1]);
